@@ -1,0 +1,8 @@
+<h1>
+  <%= @share.title || "Share for #{@share.email}" %>
+</h1>
+<% if @share.description -%>
+  <div class="description">
+    <%= @share.description %>
+  </div>
+<% end -%>
