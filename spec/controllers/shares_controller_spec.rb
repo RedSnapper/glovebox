@@ -3,6 +3,18 @@ require 'spec_helper'
 describe SharesController do
   render_views
 
+  context "get :index" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com",
+                             :title => "Test",
+                             :description => "Test description")
+    end
+    it "should be successful" do
+      get :index
+      response.should be_success
+    end
+  end
+
   context "show" do
     before(:each) do
       @share = Share.create!(:email => "test@example.com", 
