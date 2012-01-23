@@ -38,4 +38,44 @@ describe SharesController do
     end
   end
 
+  context "put :create" do
+    before(:each) do
+      @good_attrs = { :email => "test@example.com", :title => "Test",
+                                                    :description => "This is a test" }
+      @bad_attrs = { :email => "", :title => "Bad", :description => "Bad example" }
+    end
+    it "should redirect with good parameters" do
+      put :create, :share => @good_attrs
+      response.should redirect_to Share.last
+    end
+
+    it "should render :new with bad parameters" do
+      put :create, :share => @bad_attrs
+      response.should render_template :new
+    end
+
+    it "should create a new share with good parameters" do
+      lambda do
+        put :create, :share => @good_attrs
+      end.should change(Share, :count).by(1)
+    end
+
+    it "should not create a new share with bad parameters" do
+      lambda do
+        put :create, :share => @bad_attrs
+      end.should_not change(Share, :count)
+    end
+
+    it "should have a success flash with good parameters" do
+      put :create, :share => @good_attrs
+      flash[:success].should =~ /Share created/i
+    end
+
+    it "should have an error flash with bad parameters" do
+      put :create, :share => @bad_attrs
+      flash[:error].should =~ /Share creation failed/i
+    end
+
+  end
+
 end
