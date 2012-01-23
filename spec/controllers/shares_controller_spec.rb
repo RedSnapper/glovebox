@@ -30,4 +30,12 @@ describe SharesController do
     end
 
   end
+
+  context "get :new" do
+    it "should be successful" do
+      get :new
+      response.should be_success
+    end
+  end
+
 end
