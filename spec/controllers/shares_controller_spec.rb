@@ -113,5 +113,23 @@ describe SharesController do
     end
   end
 
+  context "destroy :delete" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com")
+    end
+    it "should delete the share" do
+      lambda do
+        delete :destroy, :id => @share
+      end.should change(Share, :count).by(-1)
+    end
+    it "should redirect to :index" do
+      delete :destroy, :id => @share
+      response.should redirect_to shares_path
+    end
+    it "should have a success flash on deletion" do
+      delete :destroy, :id => @share
+      flash[:success].should =~ /Share deleted/i
+    end
+  end
 
 end

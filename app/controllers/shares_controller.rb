@@ -32,4 +32,10 @@ class SharesController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    Share.find(params[:id]).destroy
+    flash[:success] = "Share deleted"
+    redirect_to shares_path
+  end
 end
