@@ -1,5 +1,7 @@
 Glovebox::Application.routes.draw do
-  resources :shares
+  resources :shares do
+    resources :uploads, :only => [:create, :update]
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
