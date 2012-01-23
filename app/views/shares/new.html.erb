@@ -2,6 +2,7 @@
   Create new share
 </h1>
 <%= form_for @share, :class => "form-stacked" do |f| %>
+  <%= render 'layouts/errors', :object => @share %>
   <div class="clearfix">
     <%= f.label :email %>
     <div class="input">
