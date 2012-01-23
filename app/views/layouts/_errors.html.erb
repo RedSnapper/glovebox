@@ -1,10 +1,12 @@
 <% if object.errors.any? %>
   <div class="alert-message block-message error">
-    <h3>
-      <%= pluralize(object.errors.count, "error") %>
-      prevented this <%= object.class.table_name.singularize %> from being saved:
-    </h3>
-    <p>There were problems with the following fields</p>
+      <p>
+        <strong>
+          <%= pluralize(object.errors.count, "error") %>
+          prevented this <%= object.class.table_name.singularize %> from being saved.
+        </strong> 
+        There were problems with the following fields:
+      </p>
     <ul>
       <% object.errors.full_messages.each do |message| %>
         <li>
