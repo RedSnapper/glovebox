@@ -17,4 +17,19 @@ class SharesController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @share = Share.find(params[:id])
+  end
+
+  def update
+    @share = Share.find(params[:id])
+    if @share.update_attributes(params[:share])
+      flash[:success] = "Share updated"
+      redirect_to :share
+    else
+      flash[:error] = "Share update failed"
+      render :edit
+    end
+  end
 end

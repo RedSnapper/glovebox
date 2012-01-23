@@ -78,4 +78,40 @@ describe SharesController do
 
   end
 
+  context "get :edit" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com")
+    end
+
+    it "should be successful" do
+      get :edit, :id => @share
+    end
+  end
+
+  context "put :update" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com")
+      @good_attrs = { :email => "test@example.com", :title => "Test",
+                                                    :description => "This is a test" }
+      @bad_attrs = { :email => "", :title => "Bad", :description => "Bad example" }
+    end
+    it "should redirect with good parameters" do
+      put :update, :id => @share, :share => @good_attrs
+      response.should redirect_to Share.last
+    end
+    it "should render :new with bad parameters" do
+      put :update, :id => @share, :share => @bad_attrs
+      response.should render_template :edit
+    end
+    it "should have a success flash with good parameters" do
+      put :update, :id => @share, :share => @good_attrs
+      flash[:success].should =~ /Share updated/i
+    end
+    it "should have an error flash with bad parameters" do
+      put :update, :id => @share, :share => @bad_attrs
+      flash[:error].should =~ /Share update failed/i
+    end
+  end
+
+
 end
