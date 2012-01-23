@@ -15,4 +15,12 @@ describe Share do
       share.should_not be_valid
     end
   end
+  context "association" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com")
+    end
+    it "should have uploads" do
+      @share.should respond_to(:uploads)
+    end
+  end
 end
