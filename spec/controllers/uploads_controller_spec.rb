@@ -16,4 +16,20 @@ describe UploadsController do
       response.should redirect_to @share
     end
   end
+
+  context "delete :destroy" do
+    before(:each) do
+      @upload = @share.uploads.build(:name => "test")
+      @upload.save
+    end
+    it "should reduce the number of uploads by 1" do
+      lambda do
+        delete :destroy, :share_id => @share, :id => @upload
+      end.should change(Upload, :count).by(-1)
+    end
+    it "should redirect to the share on success" do
+      delete :destroy, :share_id => @share, :id => @upload
+      response.should redirect_to @share
+    end
+  end
 end
