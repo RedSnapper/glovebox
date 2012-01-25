@@ -10,6 +10,7 @@
   </div>
 <% end -%>
 
+<%# output the uploads %>
 <% unless @share.uploads.empty? -%>
   <h4>
     Uploads (<span id="upload_count"><%= @share.uploads.count %></span>) 
@@ -19,10 +20,12 @@
   </ul>
 <% end -%>
 
+<%# Uploadify initialisation script %>
 <% key = Rails.application.config.session_options[:key] -%>
 <script type="text/javascript">
   $(document).ready(function(){
       var upload_params = {
+				<%# not strictly necessary at the moment, but will be useful for authenticated sessions later  %>
         '<%= key %>' : '<%= cookies[key] %>',
         'authenticity_token' : '<%= form_authenticity_token %>',
         '_http_accept': 'application/javascript'
@@ -42,6 +45,7 @@
       });
   });
 </script>
+<%# and the actual upload form %>
 <%= form_for [@share, @upload], :class => "form-stacked" do |f| %>
   <%= render 'layouts/errors', :object => @upload %>
   <div class="clearfix">
