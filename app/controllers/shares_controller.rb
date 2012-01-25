@@ -5,6 +5,7 @@ class SharesController < ApplicationController
 
   def show 
     @share = Share.find(params[:id])
+    @upload = @share.uploads.new
   end
 
   def new
