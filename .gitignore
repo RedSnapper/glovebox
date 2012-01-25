@@ -14,3 +14,6 @@
 /log/*.log
 /tmp
 *.swp
+
+# exclude the uploads directory
+public/uploads/
