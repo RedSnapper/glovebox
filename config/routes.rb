@@ -1,4 +1,6 @@
 Glovebox::Application.routes.draw do
+  devise_for :admins
+
   resources :shares do
     resources :uploads, :only => [:create,:destroy]
   end
