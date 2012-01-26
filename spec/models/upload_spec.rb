@@ -10,4 +10,10 @@ describe Upload do
       @upload.should respond_to(:share).with(@share.id)
     end
   end
+  context "shortcut generation" do
+    it "should generate a shortcut when saved" do
+      @upload.save
+      @upload.shortcut.length.should == 8
+    end
+  end
 end
