@@ -1,6 +1,6 @@
 class SharesController < ApplicationController
 
-  before_filter :authenticate_admin!
+  before_filter :authenticate_admin!, :except => :show
 
   def index
     @shares = Share.all
