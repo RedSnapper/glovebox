@@ -18,9 +18,16 @@ describe Share do
   context "association" do
     before(:each) do
       @share = Share.create!(:email => "test@example.com")
+      @upload = @share.uploads.build
+      @upload.save
     end
     it "should have uploads" do
       @share.should respond_to(:uploads)
+    end
+    it "should destroy uploads when destroyed" do
+      lambda do
+        @share.destroy
+      end.should change(Upload, :count).by(-1)
     end
   end
 end
