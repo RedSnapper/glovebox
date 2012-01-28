@@ -23,4 +23,10 @@ describe Share do
       @share.should respond_to(:uploads)
     end
   end
+  context "access key" do
+    it "should generate an access key on create" do
+      share = Share.create!(:email => "test@example.com")
+      share.access_key.length.should == 24
+    end
+  end
 end
