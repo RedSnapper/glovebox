@@ -1,6 +1,12 @@
 <h1>
   <%= @share.title || "Share for #{@share.email}" %>
 </h1>
+<h4>
+  Access URL
+</h4>
+<div class="access_key">
+  <%= link_to share_path(@share, :access_key => @share.access_key), share_path(@share, :access_key => @share.access_key) %>
+</div>
 <% unless @share.description.blank? -%>
   <h4>
     Description
