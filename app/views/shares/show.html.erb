@@ -30,6 +30,7 @@
 <% key = Rails.application.config.session_options[:key] -%>
 <script type="text/javascript">
   $(document).ready(function(){
+      $("form#new_upload input[type='submit']").remove();
       var upload_params = {
 				<%# not strictly necessary at the moment, but will be useful for authenticated sessions later  %>
         '<%= key %>' : '<%= cookies[key] %>',
@@ -61,6 +62,7 @@
       <%= f.file_field :file %>
     </div>
   </div>
+  <%= f.submit "Upload", :class => "btn primary" %>
 <% end -%>
 
 <% if admin_signed_in? -%>
