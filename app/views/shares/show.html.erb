@@ -28,7 +28,9 @@
 				<%# not strictly necessary at the moment, but will be useful for authenticated sessions later  %>
         '<%= key %>' : '<%= cookies[key] %>',
         'authenticity_token' : '<%= form_authenticity_token %>',
-        '_http_accept': 'application/javascript'
+        '_http_accept': 'application/javascript',
+        <%= "'access_key': '#{@share.access_key}'" unless admin_signed_in? %>
+        <%= "'auth_token': '#{current_admin.authentication_token}'" if admin_signed_in? %>
       };
       $('input#upload_file').uploadify({
         'uploader'     :'/assets/uploadify.swf',
