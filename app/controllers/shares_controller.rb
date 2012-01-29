@@ -1,10 +1,14 @@
 class SharesController < ApplicationController
+
+  before_filter :get_share, :except => [:index, :new, :create]
+  before_filter :authenticate_admin!, :except => :show
+  before_filter :authenticate_admin_or_access_key!, :only => :show
+
   def index
     @shares = Share.all
   end
 
   def show 
-    @share = Share.find(params[:id])
     @upload = @share.uploads.new
   end
 
@@ -24,11 +28,9 @@ class SharesController < ApplicationController
   end
 
   def edit
-    @share = Share.find(params[:id])
   end
 
   def update
-    @share = Share.find(params[:id])
     if @share.update_attributes(params[:share])
       flash[:success] = "Share updated"
       redirect_to :share
@@ -39,8 +41,20 @@ class SharesController < ApplicationController
   end
 
   def destroy
-    Share.find(params[:id]).destroy
+    @share.destroy
     flash[:success] = "Share deleted"
     redirect_to shares_path
+  end
+
+  private
+
+  def get_share
+    @share = Share.find(params[:id])
+  end
+
+  def authenticate_admin_or_access_key!
+    unless @share.check_access_key(params[:access_key])
+      authenticate_admin!
+    end
   end
 end

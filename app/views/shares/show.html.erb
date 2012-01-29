@@ -1,7 +1,13 @@
 <h1>
   <%= @share.title || "Share for #{@share.email}" %>
 </h1>
-<% if @share.description -%>
+<h4>
+  Access URL
+</h4>
+<div class="access_key">
+  <%= link_to share_path(@share, :access_key => @share.access_key), share_path(@share, :access_key => @share.access_key) %>
+</div>
+<% unless @share.description.blank? -%>
   <h4>
     Description
   </h4>
@@ -24,11 +30,14 @@
 <% key = Rails.application.config.session_options[:key] -%>
 <script type="text/javascript">
   $(document).ready(function(){
+      $("form#new_upload input[type='submit']").remove();
       var upload_params = {
 				<%# not strictly necessary at the moment, but will be useful for authenticated sessions later  %>
         '<%= key %>' : '<%= cookies[key] %>',
         'authenticity_token' : '<%= form_authenticity_token %>',
-        '_http_accept': 'application/javascript'
+        '_http_accept': 'application/javascript',
+        <%= "'access_key': '#{@share.access_key}'" unless admin_signed_in? %>
+        <%= "'auth_token': '#{current_admin.authentication_token}'" if admin_signed_in? %>
       };
       $('input#upload_file').uploadify({
         'uploader'     :'/assets/uploadify.swf',
@@ -53,11 +62,14 @@
       <%= f.file_field :file %>
     </div>
   </div>
+  <%= f.submit "Upload", :class => "btn primary" %>
 <% end -%>
 
-<div class="form-stacked">
-  <div class="actions">
-    <%= link_to "Edit", edit_share_path(@share), :class => "btn" %>
-    <%= link_to "Delete", @share, :method => "delete", :class => "btn danger" %>
+<% if admin_signed_in? -%>
+  <div class="form-stacked">
+    <div class="actions">
+      <%= link_to "Edit", edit_share_path(@share), :class => "btn" %>
+      <%= link_to "Delete", @share, :method => "delete", :class => "btn danger" %>
+    </div>
   </div>
-</div>
+<% end -%>

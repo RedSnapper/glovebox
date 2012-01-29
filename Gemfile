@@ -39,3 +39,9 @@ group :test do
 end
 
 gem 'carrierwave'
+
+gem 'devise'
+
+group :test, :development do
+  gem 'factory_girl'
+end

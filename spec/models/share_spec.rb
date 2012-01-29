@@ -30,4 +30,18 @@ describe Share do
       end.should change(Upload, :count).by(-1)
     end
   end
+  context "access key" do
+    it "should generate an access key on create" do
+      share = Share.create!(:email => "test@example.com")
+      share.access_key.length.should == 24
+    end
+    it "should verify the access key is correct" do
+      share = Share.create!(:email => "test@example.com")
+      share.check_access_key(share.access_key).should be_true
+    end
+    it "shold verify the access key is wrong" do
+      share = Share.create!(:email => "test@example.com")
+      share.check_access_key("wrong_key").should be_false
+    end
+  end
 end
