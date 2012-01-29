@@ -35,26 +35,34 @@ describe SharesController do
                              :title => "Test share", 
                              :description => "Test description test")
     end
-
-    it "should be successful" do
-      get :show, :id => @share
-      response.should be_success
+    context "not logged in, no querystring parameter" do
+      it "should redirect to sign in" do
+        get :show, :id => @share
+        response.should redirect_to(new_admin_session_path)
+      end
     end
 
-    it "should contain the share data in the page content" do
-      get :show, :id => @share
-      #check the description exists in the page
-      response.should have_selector("div", :content => @share.description)
-      #check the title exists in a h1
-      response.should have_selector("h1",  :content => @share.title)
-    end
+    context "not logged in, access key in query string" do
+      it "should be successful" do
+        get :show, :id => @share, :access_key => @share.access_key
+        response.should be_success
+      end
 
-    it "should show the to email where there is no title" do
-      get :show, :id => Share.create(:email => "test@example.com")
-      response.should have_selector("h1", 
-                                    :content => "Share for test@example.com")
-    end
+      it "should contain the share data in the page content" do
+        get :show, :id => @share, :access_key => @share.access_key
+        #check the description exists in the page
+        response.should have_selector("div", :content => @share.description)
+        #check the title exists in a h1
+        response.should have_selector("h1",  :content => @share.title)
+      end
 
+      it "should show the to email where there is no title" do
+        share_no_title = Share.create(:email => "test@example.com")
+        get :show, :id => share_no_title, 
+                   :access_key => share_no_title.access_key
+        response.should have_selector("h1", :content => "test@example.com")
+      end
+    end
   end
 
   context "get :new" do
