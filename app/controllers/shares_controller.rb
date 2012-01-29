@@ -53,7 +53,7 @@ class SharesController < ApplicationController
   end
 
   def authenticate_admin_or_access_key!
-    if params[:access_key] != @share.access_key
+    unless @share.check_access_key(params[:access_key])
       authenticate_admin!
     end
   end
