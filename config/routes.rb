@@ -7,6 +7,8 @@ Glovebox::Application.routes.draw do
 
   root :to => "shares#index"
 
+  match "d/:download_id", :to => "downloads#download", :as => "download_file"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

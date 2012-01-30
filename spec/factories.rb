@@ -7,3 +7,8 @@ Factory.define :admin do |f|
   f.password               "password"
   f.password_confirmation  "password"
 end
+
+Factory.define :upload do |f|
+  f.file { File.open(File.join(Rails.root, 'spec', 'support', 
+                               'uploads', 'file', 'rails.png')) }
+end

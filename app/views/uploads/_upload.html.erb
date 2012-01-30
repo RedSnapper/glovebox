@@ -1,7 +1,6 @@
 <% unless upload.id.nil? %>
 	<li id="<%= upload.id %>">
-		<%= link_to "#{File.basename(upload.file.to_s)} - (#{number_to_human_size(upload.file.size)})", upload.file.to_s %> 
+		<%= link_to "#{File.basename(upload.file.to_s)} - (#{number_to_human_size(upload.file.size)})", download_file_path(upload.shortcut) %> 
         <%= link_to "Delete", share_upload_path(share,upload, :access_key => params[:access_key]), :method => :delete, :remote => true, :class => "delete" %>
-        <input class="span2 uneditable-input" value="/d/<%= upload.shortcut %>" />
 	</li>
 <% end %>
