@@ -44,4 +44,18 @@ describe Share do
       share.check_access_key("wrong_key").should be_false
     end
   end
+  context "view key" do
+    it "should generate an view key on create" do
+      share = Share.create!(:email => "test@example.com")
+      share.view_key.length.should == 24
+    end
+    it "should verify the view key is correct" do
+      share = Share.create!(:email => "test@example.com")
+      share.check_view_key(share.view_key).should be_true
+    end
+    it "shold verify the view key is wrong" do
+      share = Share.create!(:email => "test@example.com")
+      share.check_view_key("wrong_key").should be_false
+    end
+  end
 end
