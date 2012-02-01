@@ -7,6 +7,7 @@ Glovebox::Application.routes.draw do
 
   root :to => "shares#index"
 
+  #add a download shortcut link
   match "d/:download_id", :to => "downloads#download", :as => "download_file"
 
   # The priority is based upon order of creation:
