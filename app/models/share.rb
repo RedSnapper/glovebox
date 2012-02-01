@@ -1,5 +1,5 @@
 class Share < ActiveRecord::Base
-  attr_accessible :email, :title, :description, :access_key
+  attr_accessible :email, :title, :description
 
   before_create :generate_access_key
 
