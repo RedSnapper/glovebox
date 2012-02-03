@@ -5,6 +5,9 @@ Glovebox::Application.routes.draw do
     resources :uploads, :only => [:create,:destroy]
   end
 
+  #add a 'view' link to Shares
+  get "shares/:id/view", :to => "shares#view", :as => "view_share"
+
   root :to => "shares#index"
 
   #add a download shortcut link

@@ -3,6 +3,7 @@ class SharesController < ApplicationController
   before_filter :get_share, :except => [:index, :new, :create]
   before_filter :authenticate_admin!, :except => :show
   before_filter :authenticate_admin_or_access_key!, :only => :show
+  before_filter :authenticate_admin_or_view_key!, :only => :view
 
   def index
     @shares = Share.all
@@ -46,6 +47,10 @@ class SharesController < ApplicationController
     redirect_to shares_path
   end
 
+  #View files uploaded to a share without upload/delete controls
+  def view
+  end
+
   private
 
   def get_share
@@ -54,6 +59,12 @@ class SharesController < ApplicationController
 
   def authenticate_admin_or_access_key!
     unless @share.check_access_key(params[:access_key])
+      authenticate_admin!
+    end
+  end
+
+  def authenticate_admin_or_view_key!
+    unless @share.check_view_key(params[:view_key])
       authenticate_admin!
     end
   end

@@ -221,4 +221,27 @@ describe SharesController do
       end
     end
   end
+
+  context "get :view" do
+    before(:each) do
+      @share = Share.create!(:email => "test@example.com")
+    end
+    context "not signed in, no view key" do
+      it "should redirect to sign in" do
+        get :view, :id => @share
+        response.should redirect_to(new_admin_session_path)
+      end
+    end
+
+    context "signed in" do
+      before(:each) do
+        @admin = Factory(:admin)
+        sign_in @admin
+      end
+      it "should be successful" do
+        get :view, :id => @share
+        response.should be_success
+      end
+    end
+  end
 end

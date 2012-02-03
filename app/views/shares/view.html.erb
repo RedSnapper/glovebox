@@ -1,0 +1,22 @@
+<h1>
+  <%= @share.title || "Share for #{@share.email}" %>
+</h1>
+
+<% unless @share.description.blank? -%>
+  <h4>
+    Description
+  </h4>
+  <div class="description">
+    <%= @share.description %>
+  </div>
+<% end -%>
+
+<%# output the uploads %>
+<% unless @share.uploads.empty? -%>
+  <h4>
+    Uploads (<span id="upload_count"><%= @share.uploads.count %></span>) 
+  </h4>
+  <ul id="uploads">
+    <%= render :partial => 'uploads/upload', :collection => @share.uploads, :locals => { :share => @share, :skip_delete => true } %>
+  </ul>
+<% end -%>
