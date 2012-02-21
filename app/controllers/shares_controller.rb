@@ -1,7 +1,7 @@
 class SharesController < ApplicationController
 
   before_filter :get_share, :except => [:index, :new, :create]
-  before_filter :authenticate_admin!, :except => :show
+  before_filter :authenticate_admin!, :except => [:show, :view]
   before_filter :authenticate_admin_or_access_key!, :only => :show
   before_filter :authenticate_admin_or_view_key!, :only => :view
 

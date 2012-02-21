@@ -243,5 +243,12 @@ describe SharesController do
         response.should be_success
       end
     end
+
+    context "not signed in, with view key" do
+      it "should be successfull" do
+        get :view, :id => @share, :view_key => @share.view_key
+        response.should be_success
+      end
+    end
   end
 end
