@@ -30,7 +30,7 @@
     Uploads (<span id="upload_count"><%= @share.uploads.count %></span>) 
   </h4>
   <ul id="uploads">
-		<%= render :partial => 'uploads/upload', :collection => @share.uploads, :locals => { :share => @share } %>
+    <%= render :partial => 'uploads/upload', :collection => @share.uploads, :locals => { :share => @share, :skip_delete => false } %>
   </ul>
 <% end -%>
 
