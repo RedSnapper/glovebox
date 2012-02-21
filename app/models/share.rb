@@ -11,17 +11,11 @@ class Share < ActiveRecord::Base
 
   #confirm access key matches the one in the model
   def check_access_key(access_key)
-    if self.access_key == access_key
-      return true
-    end
-    false
+    self.access_key == access_key
   end
 
   def check_view_key(view_key)
-    if self.view_key == view_key
-      return true
-    end
-    false
+    self.view_key == view_key
   end
 
   private
