@@ -1,3 +1,5 @@
 <li>
-  <%= link_to "Share: #{share.title}", share %>
+  <%= link_to "Share: #{share.title}", share %> Created: <%= share.created_at.strftime('%d/%m/%Y') %> 
+  <%# the total size of all of the files in the share, formatted to be human-readable (KB, MB, etc...) %>
+  (<%= number_to_human_size(share.uploads.inject(0) { |count, u| count + u.file.size }) %>)
 </li>

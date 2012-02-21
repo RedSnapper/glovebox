@@ -1,7 +1,12 @@
 <h1>
-  All shares
+  Share index <br />
+  <small>
+    This is a list of all shares that are on the system
+  </small>
 </h1>
 
 <ul>
   <%= render @shares %>
 </ul>
+
+<%= link_to "Add a new share", new_share_path, :class => "btn primary" %>
