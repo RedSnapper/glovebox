@@ -14,7 +14,7 @@
 <%# output the uploads %>
 <% unless @share.uploads.empty? -%>
   <h4>
-    Uploads (<span id="upload_count"><%= @share.uploads.count %></span>) 
+    Files (<span id="upload_count"><%= @share.uploads.count %></span>) 
   </h4>
   <ul id="uploads">
     <%= render :partial => 'uploads/upload', :collection => @share.uploads, :locals => { :share => @share, :skip_delete => true } %>
