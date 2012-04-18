@@ -20,10 +20,10 @@ class SharesController < ApplicationController
   def create
     @share = Share.new(params[:share])
     if @share.save
-      flash[:success] = "Share created"
+      flash[:success] = "Box created"
       redirect_to @share
     else
-      flash[:error] = "Share creation failed"
+      flash[:error] = "Box creation failed"
       render :new
     end
   end
@@ -33,17 +33,17 @@ class SharesController < ApplicationController
 
   def update
     if @share.update_attributes(params[:share])
-      flash[:success] = "Share updated"
+      flash[:success] = "Box updated"
       redirect_to :share
     else
-      flash[:error] = "Share update failed"
+      flash[:error] = "Box update failed"
       render :edit
     end
   end
 
   def destroy
     @share.destroy
-    flash[:success] = "Share deleted"
+    flash[:success] = "Box deleted"
     redirect_to shares_path
   end
 
