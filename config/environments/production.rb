@@ -58,5 +58,20 @@ Glovebox::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  ######################
+  # Mail configuration #
+  ######################
+
+  # address to appear in links inside devise emails
+  config.action_mailer.default_url_options = { :host => ENV['MAIL-HOST'] }
+
+  # mail configuration. Replace with your own configuration if you're not
+  # using SMTP. Details here: 
+  # http://edgeguides.rubyonrails.org/action_mailer_basics.html#example-action-mailer-configuration
+  
+  config.action_mailer.smtp_settings = {
+    :address              => ENV['SMTP-HOST'],
+    :port                 => 25,
+    :domain               => ENV['MAIL-HOST']
+  }
 end
