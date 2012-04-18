@@ -16,7 +16,14 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand">Glovebox</a>
+        <a class="brand">
+          <% if APP_CONFIG %>
+            <img src="<%= APP_CONFIG['logo_path'] %>" alt="Headline" />
+            <%= APP_CONFIG['heading'] %>
+          <% else %>
+            Glovebox
+          <% end %>
+        </a>
         <ul class="nav">
           <li>
             <%= link_to "New Box", new_share_path if admin_signed_in? %>
