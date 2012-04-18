@@ -41,6 +41,7 @@ end
 gem 'carrierwave'
 
 gem 'devise'
+gem 'therubyracer'
 
 group :test, :development do
   gem 'factory_girl'
