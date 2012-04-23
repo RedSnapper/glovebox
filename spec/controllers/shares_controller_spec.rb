@@ -124,12 +124,12 @@ describe SharesController do
 
       it "should have a success flash with good parameters" do
         put :create, :share => @good_attrs
-        flash[:success].should =~ /Share created/i
+        flash[:success].should =~ /Box created/i
       end
 
       it "should have an error flash with bad parameters" do
         put :create, :share => @bad_attrs
-        flash[:error].should =~ /Share creation failed/i
+        flash[:error].should =~ /Box creation failed/i
       end
     end
   end
@@ -182,11 +182,11 @@ describe SharesController do
       end
       it "should have a success flash with good parameters" do
         put :update, :id => @share, :share => @good_attrs
-        flash[:success].should =~ /Share updated/i
+        flash[:success].should =~ /Box updated/i
       end
       it "should have an error flash with bad parameters" do
         put :update, :id => @share, :share => @bad_attrs
-        flash[:error].should =~ /Share update failed/i
+        flash[:error].should =~ /Box update failed/i
       end
     end
   end
@@ -217,7 +217,7 @@ describe SharesController do
       end
       it "should have a success flash on deletion" do
         delete :destroy, :id => @share
-        flash[:success].should =~ /Share deleted/i
+        flash[:success].should =~ /Box deleted/i
       end
     end
   end
