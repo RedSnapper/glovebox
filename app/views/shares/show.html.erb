@@ -1,5 +1,7 @@
 <h1>
   <%= @share.title || "Box for #{@share.email}" %>
+  <br />
+  <small><%= custom_or_default_description "Please click one of the files below to download it, or click 'Select Files' to upload a file to the sender." %></small>
 </h1>
 <% if admin_signed_in? -%>
   <h4>
@@ -13,14 +15,6 @@
   </h4>
   <div class="view_key">
     <%= link_to view_share_path(@share, :view_key => @share.view_key), view_share_path(@share, :view_key => @share.view_key) %>
-  </div>
-<% end -%>
-<% unless @share.description.blank? -%>
-  <h4>
-    Description
-  </h4>
-  <div class="description">
-    <%= @share.description %>
   </div>
 <% end -%>
 
