@@ -1,0 +1,14 @@
+<h4>
+  Read / Write URL
+</h4>
+<div class="access_key">
+  <%= link_to share_path(@share, :access_key => @share.access_key), share_path(@share, :access_key => @share.access_key) %>
+</div>
+<br />
+<h4>
+  Read-only URL
+</h4>
+<div class="view_key">
+  <%= link_to view_share_path(@share, :view_key => @share.view_key), view_share_path(@share, :view_key => @share.view_key) %>
+</div>
+<br />

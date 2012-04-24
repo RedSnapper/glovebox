@@ -4,18 +4,7 @@
   <small><%= custom_or_default_description "Please click one of the files below to download it, or click 'Select Files' to upload a file to the sender." %></small>
 </h1>
 <% if admin_signed_in? -%>
-  <h4>
-    Upload URL
-  </h4>
-  <div class="access_key">
-    <%= link_to share_path(@share, :access_key => @share.access_key), share_path(@share, :access_key => @share.access_key) %>
-  </div>
-  <h4>
-    Download URL
-  </h4>
-  <div class="view_key">
-    <%= link_to view_share_path(@share, :view_key => @share.view_key), view_share_path(@share, :view_key => @share.view_key) %>
-  </div>
+<%= render :partial => 'links' %>
 <% end -%>
 
 <%# output the uploads %>
@@ -28,43 +17,7 @@
   </ul>
 <% end -%>
 
-<%# Uploadify initialisation script %>
-<% key = Rails.application.config.session_options[:key] -%>
-<script type="text/javascript">
-  $(document).ready(function(){
-      $("form#new_upload input[type='submit']").remove();
-      var upload_params = {
-        '<%= key %>' : '<%= cookies[key] %>',
-        'authenticity_token' : '<%= form_authenticity_token %>',
-        '_http_accept': 'application/javascript',
-        <%= "'access_key': '#{@share.access_key}'" unless admin_signed_in? %>
-        <%= "'auth_token': '#{current_admin.authentication_token}'" if admin_signed_in? %>
-      };
-      $('input#upload_file').uploadify({
-        'uploader'     :'/assets/uploadify.swf',
-        'script'       :$('input#upload_file').parents('form').attr('action') + ".js",
-        'fileDataName' :'upload[file]',
-        'fileExt'      :'*.png;*.jpg;*.gif',
-        'cancelImg'    :'/assets/cancel.png',
-        'multi'        :true,
-        'scriptData'   :upload_params,
-        'auto'         :true,
-        'onComplete'   :function(e, id, obj, response, data) {
-          $('#uploads').append(response);
-        }
-      });
-  });
-</script>
-<%# and the actual upload form %>
-<%= form_for [@share, @upload], :class => "form-stacked" do |f| %>
-  <%= render 'layouts/errors', :object => @upload %>
-  <div class="clearfix">
-    <div class="input">
-      <%= f.file_field :file %>
-    </div>
-  </div>
-  <%= f.submit "Upload", :class => "btn btn-primary" %>
-<% end -%>
+<%= render :partial => 'uploader' %>
 
 <% if admin_signed_in? -%>
   <div class="form-stacked">
