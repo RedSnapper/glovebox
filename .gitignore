@@ -16,8 +16,9 @@
 *.swp
 
 # exclude the uploads directory
-public/uploads/
+uploads/*
 
 
 # exclude app configuration
 config/config.yml
+
