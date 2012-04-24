@@ -3,14 +3,7 @@
   <br />
   <small><%= custom_or_default_description "Please click one of the files below to download it, or click 'Select Files' to upload a file to the sender." %></small>
 </h1>
-
-<% unless @share.description.blank? -%>
-  <h4>
-    Description
-  </h4>
-  <div class="description">
-  </div>
-<% end -%>
+<br />
 
 <%# output the uploads %>
 <% unless @share.uploads.empty? -%>
