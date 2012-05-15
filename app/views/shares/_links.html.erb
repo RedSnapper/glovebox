@@ -2,7 +2,7 @@
   Read / Write URL
 </h4>
 <div class="access_key">
-  <%= link_to "http://#{ActionMailer::Base.default_url_options[:host]}/#{share_path(@share, :access_key => @share.access_key)}", 
+  <%= link_to "http://#{ActionMailer::Base.default_url_options[:host]}#{share_path(@share, :access_key => @share.access_key)}", 
               share_path(@share, :access_key => @share.access_key) %>
 </div>
 <br />
@@ -10,7 +10,7 @@
   Read-only URL
 </h4>
 <div class="view_key">
-  <%= link_to "http://#{ActionMailer::Base.default_url_options[:host]}/#{view_share_path(@share, :view_key => @share.view_key)}", 
+  <%= link_to "http://#{ActionMailer::Base.default_url_options[:host]}#{view_share_path(@share, :view_key => @share.view_key)}", 
               view_share_path(@share, :view_key => @share.view_key) %>
 </div>
 <br />
