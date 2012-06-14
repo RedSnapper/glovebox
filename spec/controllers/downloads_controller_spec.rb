@@ -4,7 +4,7 @@ describe DownloadsController do
 
   context "get download" do
     it "should be successful" do
-      upload = Factory(:upload)
+      upload = FactoryGirl.create(:upload)
       get :download, :download_id => upload.shortcut
       response.should be_success
     end

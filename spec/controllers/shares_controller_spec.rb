@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SharesController do
   render_views
   before(:each) do
-    @user = Factory(:admin)
+    @user = FactoryGirl.create(:admin)
   end
 
   context "get :index" do
@@ -235,7 +235,7 @@ describe SharesController do
 
     context "signed in" do
       before(:each) do
-        @admin = Factory(:admin)
+        @admin = FactoryGirl.create(:admin)
         sign_in @admin
       end
       it "should be successful" do

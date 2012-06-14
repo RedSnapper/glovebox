@@ -15,7 +15,7 @@ describe UploadsController do
 
     context "as a logged in user" do
       before(:each) do
-        @admin = Factory(:admin)
+        @admin = FactoryGirl.create(:admin)
         sign_in @admin
       end
       it "should create a new upload" do
@@ -58,7 +58,7 @@ describe UploadsController do
 
     context "as a logged in user" do
       before(:each) do
-        @admin = Factory(:admin)
+        @admin = FactoryGirl.create(:admin)
         sign_in @admin
       end
       it "should reduce the number of uploads by 1" do
